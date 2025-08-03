@@ -21,7 +21,6 @@ SettingsDependency = Annotated[Settings, Depends(get_settings)]
 async def get_db_session(request: Request) -> AsyncGenerator[AsyncSession]:
     async_session_local = request.app.state.AsyncSessionLocal
     async with async_session_local() as session:
-
         yield session
 
 
@@ -49,5 +48,6 @@ async def get_user(
 
     except (ExpiredTokenError, JoseError, ValueError) as e:
         raise InvalidAuthorizationTokenError() from e
+
 
 UserDependency = Annotated[User, Depends(get_user)]
