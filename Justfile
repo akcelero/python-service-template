@@ -1,15 +1,16 @@
+set quiet := true
 set dotenv-load := true
 set export := true
 set unstable := true
 
 # ------------------------------ UTILS ------------------------------
 
-@_default:
+_default:
     just --choose
 
 [doc("prints this list")]
 [group("help")]
-@help:
+help:
     just --list
 
 # ------------------------------ DOCKER ------------------------------
@@ -18,7 +19,8 @@ set unstable := true
 [doc("build and force-recreate up all")]
 [group("docker")]
 build:
-    docker compose build && docker compose up --force-recreate -d
+    docker compose build
+    docker compose up --force-recreate -d
 
 [doc("run app in background")]
 [group("docker")]
@@ -105,4 +107,4 @@ mypy:
 
 [doc("run all tests")]
 [group("tests")]
-@test: pytest bandit mypy
+test: pytest bandit mypy
