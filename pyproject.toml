@@ -1,0 +1,107 @@
+[project]
+name = "Python-service-template"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "uvicorn==0.35.0",
+    "fastapi==0.116.1",
+    "joserfc==1.2.2",
+    "pydantic==2.11.7",
+    "pydantic-settings==2.10.1",
+    "sqlalchemy[mypy]==2.0.42",
+    "asyncpg==0.30.0",
+    "alembic[tz]==1.16.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==8.4.1",
+    "pytest-mock==3.14.1",
+    "pytest-aioresponses==0.3.0",
+    "pytest-asyncio==1.1.0",
+    "freezegun==1.5.4",
+    "httpx==0.28.1",
+    "pre-commit==4.2.0",
+    "greenlet==3.2.3",
+    "ruff==0.12.7",
+    "mypy==1.17.1",
+    "bandit==1.8.6",
+    "pytest-env==1.1.5",
+    "aiosqlite==0.21.0",
+    "cryptography>=45.0.5",
+]
+
+[tool.mypy]
+plugins = [
+    "pydantic.mypy",
+    "sqlalchemy.ext.mypy.plugin"
+]
+check_untyped_defs = true
+warn_unused_ignores = true
+strict = true
+pretty = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "FAST",    # FastAPI
+    "ASYNC",   # flake8-async
+    "S",       # bandit
+    "BLE",     # flake8-blind-except
+    "FBT",     # flake8-boolean-trap
+    "B",       # flake8-bugbear
+    "A",       # flake8-builtins
+    "COM",     # flake8-commas
+    "C4",      # flake8-comprehensions
+    "DTZ",     # flake8-datetimez
+    "T10",     # flake8-debugger
+    "EXE",     # flake8-executable
+    "FA",      # flake8-future-annotations
+    "ISC",     # flake8-implicit-str-concat
+    "ICN",     # flake8-import-conventions
+    "LOG",     # flake8-logging
+    "INP",     # flake8-no-pep420
+    "PIE",     # flake8-pie
+    "T20",     # flake8-print
+    "PYI",     # flake8-pyi
+    "PT",      # flake8-pytest-style
+    "Q",       # flake8-quotes
+    "RET",     # flake8-return
+    "SLF",     # flake8-self
+    "SIM",     # flake8-simplify
+    "SLOT",    # flake8-slots
+    "TID",     # flake8-tidy-imports
+    "TD",      # flake8-todos
+    "ARG",     # flake8-unused-arguments
+    "PTH",     # flake8-use-pathlib
+    "FLY",     # flynt
+    "I",       # isort
+    "C90",     # mccabe
+    "N",       # pep8-naming
+    "PERF",    # Perflint
+    "E",       # Error
+    "W",       # Warning
+    "F",       # Pyflakes
+    "PL",      # Pylint
+    "UP",      # pyupgrade
+    "FURB",    # refurb
+    "RUF",     # Ruff-specific rules
+    "TRY",     # tryceratops
+]
+
+[tool.ruff.lint.per-file-ignores]
+"test_*.py" = [
+    "S101",     # Use of assert detected
+    "PLR0913",  # Too many arguments in function definition
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+
+[tool.bandit]
+skips = ["B101"]

@@ -1,0 +1,42 @@
+services:
+    app:
+        container_name: python-app
+        image: python-app:local
+        user: root
+        build:
+            target: local
+        volumes:
+            - ./pyproject.toml:/app/pyproject.toml
+            - ./src:/app/src
+            - ./alembic:/app/alembic
+            - ./alembic.ini:/app/alembic.ini
+            - ./tests:/app/tests
+        env_file:
+            - .env
+        ports:
+            - "0.0.0.0:${APP_PORT}:${APP_PORT}"
+        depends_on:
+            - postgres
+        networks:
+            - app_network
+
+    postgres:
+        image: postgres:17
+        container_name: postgres-db
+        environment:
+            POSTGRES_USER: fastapi_user
+            POSTGRES_PASSWORD: fastapi_password
+            POSTGRES_DB: fastapi_db
+        ports:
+            - "5432:5432"
+#        volumes:
+#            - postgres_data:/var/lib/postgresql/data
+        networks:
+            - app_network
+
+volumes:
+  postgres_data:
+
+networks:
+    app_network:
+        driver: bridge
