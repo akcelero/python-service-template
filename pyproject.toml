@@ -24,12 +24,12 @@ dev = [
     "freezegun==1.5.4",
     "httpx==0.28.1",
     "pre-commit==4.2.0",
-    "greenlet==3.2.3",
-    "ruff==0.12.7",
+    "greenlet==3.2.4",
+    "ruff==0.12.8",
     "mypy==1.17.1",
     "bandit==1.8.6",
     "aiosqlite==0.21.0",
-    "cryptography==45.0.5",
+    "cryptography==45.0.6",
 ]
 
 [tool.mypy]
